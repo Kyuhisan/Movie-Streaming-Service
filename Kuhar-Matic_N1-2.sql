@@ -54,12 +54,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Movie` (
   `Length` TIME NULL DEFAULT 0,
   `Movie_Description` TEXT NULL,
   `Rating` INT NULL DEFAULT 0,
-  `Production_Studio_ID_Production_Studio` INT UNSIGNED NULL,
+  `FK_Production_Studio` INT UNSIGNED NULL,
   PRIMARY KEY (`ID_Movie`),
   UNIQUE INDEX `ID_Movie_UNIQUE` (`ID_Movie` ASC) VISIBLE,
-  INDEX `fk_Movie_Production_Studio_idx` (`Production_Studio_ID_Production_Studio` ASC) VISIBLE,
+  INDEX `fk_Movie_Production_Studio_idx` (`FK_Production_Studio` ASC) VISIBLE,
   CONSTRAINT `fk_Movie_Production_Studio`
-    FOREIGN KEY (`Production_Studio_ID_Production_Studio`)
+    FOREIGN KEY (`FK_Production_Studio`)
     REFERENCES `mydb`.`Production_Studio` (`ID_Production_Studio`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)

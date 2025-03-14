@@ -146,20 +146,31 @@ BEGIN
     COMMIT;
 END //
 
+DELIMITER //
 CREATE PROCEDURE InsertMovies(IN num_records INT)
 BEGIN
     DECLARE i INT DEFAULT 0;
     DECLARE studio_id INT;
     DECLARE release_date DATE;
     DECLARE release_year INT;
+    
+    DECLARE min_id INT;
+    DECLARE max_id INT;
+
+    SELECT MIN(ID_Production_Studio), MAX(ID_Production_Studio) INTO min_id, max_id FROM Production_Studio;
 
     START TRANSACTION;
     WHILE i < num_records DO
-		SELECT ID_Production_Studio INTO studio_id FROM Production_Studio ORDER BY RAND() LIMIT 1;
-		SET release_date = DATE_ADD('1950-01-01', INTERVAL RAND() * (YEAR(CURDATE()) - 1950) * 365 DAY);
+        SET studio_id = FLOOR(RAND() * (max_id - min_id + 1)) + min_id;
+
+        WHILE NOT EXISTS (SELECT 1 FROM Production_Studio WHERE ID_Production_Studio = studio_id) DO
+            SET studio_id = FLOOR(RAND() * (max_id - min_id + 1)) + min_id;
+        END WHILE;
+
+        SET release_date = DATE_ADD('1950-01-01', INTERVAL RAND() * (YEAR(CURDATE()) - 1950) * 365 DAY);
         SET release_year = YEAR(release_date);
 
-        INSERT INTO Movie (Title, Release_Year, Release_Date, Length, Movie_Description, Rating, Production_Studio_ID_Production_Studio)
+        INSERT INTO Movie (Title, Release_Year, Release_Date, Length, Movie_Description, Rating, FK_Production_Studio)
         VALUES (CONCAT('Movie_', i), 
                 release_year, 
                 release_date, 
@@ -402,20 +413,20 @@ END //
 DELIMITER ;
 
 -- Klic procedur za vstavljanje podatkov
-CALL InsertProductionStudios(100);
-CALL InsertMovies(100);
-CALL InsertPersons(100);
-CALL InsertActors(100);
-CALL InsertActorsInMovies(100);
-CALL InsertReviews(100);
-CALL InsertAwards(100);
-CALL InsertMovieAwards(100);
-CALL InsertDirectors(100);
-CALL InsertDirectorsInMovies(100);
+CALL InsertProductionStudios(1000);
+CALL InsertMovies(1000);
+CALL InsertPersons(1000);
+CALL InsertActors(1000);
+CALL InsertActorsInMovies(1000);
+CALL InsertReviews(1000);
+CALL InsertAwards(1000);
+CALL InsertMovieAwards(1000);
+CALL InsertDirectors(1000);
+CALL InsertDirectorsInMovies(1000);
 CALL InsertGenres();
-CALL InsertMovieGenres(100);
-CALL InsertSubscriptions(100);
-CALL InsertUserProfiles(100);
+CALL InsertMovieGenres(1000);
+CALL InsertSubscriptions(1000);
+CALL InsertUserProfiles(1000);
 SET SQL_SAFE_UPDATES = 0;
 CALL UpdateMovieRatings();
 SET SQL_SAFE_UPDATES = 1;
