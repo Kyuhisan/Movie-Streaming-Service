@@ -122,24 +122,24 @@ DELIMITER ;
 
 INSERT INTO Procedure_Log_Normalized (Procedure_Name)
 VALUES ('Scenario 1.1');
-CALL InsertProductionStudios(1000);
-CALL InsertMovies(1000);
-CALL InsertPersons(1000);
-CALL InsertActors(1000);
-CALL InsertActorsInMovies(1000);
-CALL InsertReviews(1000);
-CALL InsertAwards(1000);
-CALL InsertMovieAwards(1000);
-CALL InsertDirectors(1000);
-CALL InsertDirectorsInMovies(1000);
+CALL InsertProductionStudios(5000);
+CALL InsertMovies(5000);
+CALL InsertPersons(5000);
+CALL InsertActors(5000);
+CALL InsertActorsInMovies(5000);
+CALL InsertReviews(5000);
+CALL InsertAwards(5000);
+CALL InsertMovieAwards(5000);
+CALL InsertDirectors(5000);
+CALL InsertDirectorsInMovies(5000);
 CALL InsertGenres();
-CALL InsertMovieGenres(1000);
-CALL InsertSubscriptions(1000);
-CALL InsertUserProfiles(1000);
-CALL SelectDirectorsByStatus(1000);
-CALL SelectMoviesByGenre(1000);
-CALL SelectMovieStudioName(1000);
-CALL SelectAllMaleUserProfiles(1000);
+CALL InsertMovieGenres(5000);
+CALL InsertSubscriptions(5000);
+CALL InsertUserProfiles(5000);
+CALL SelectDirectorsByStatus(5000);
+CALL SelectMoviesByGenre(5000);
+CALL SelectMovieStudioName(5000);
+CALL SelectAllMaleUserProfiles(5000);
 
 TRUNCATE TABLE Actor;
 TRUNCATE TABLE Actor_Movie;
@@ -158,24 +158,24 @@ TRUNCATE TABLE User_Profile;
 
 INSERT INTO Procedure_Log_Normalized (Procedure_Name)
 VALUES ('Scenario 2.1');
-CALL InsertProductionStudios(10000);
-CALL InsertMovies(10000);
-CALL InsertPersons(10000);
-CALL InsertActors(10000);
-CALL InsertActorsInMovies(10000);
-CALL InsertReviews(10000);
-CALL InsertAwards(10000);
-CALL InsertMovieAwards(10000);
-CALL InsertDirectors(10000);
-CALL InsertDirectorsInMovies(10000);
+CALL InsertProductionStudios(20000);
+CALL InsertMovies(20000);
+CALL InsertPersons(20000);
+CALL InsertActors(20000);
+CALL InsertActorsInMovies(20000);
+CALL InsertReviews(20000);
+CALL InsertAwards(20000);
+CALL InsertMovieAwards(20000);
+CALL InsertDirectors(20000);
+CALL InsertDirectorsInMovies(20000);
 CALL InsertGenres();
-CALL InsertMovieGenres(10000);
-CALL InsertSubscriptions(10000);
-CALL InsertUserProfiles(10000);
-CALL SelectDirectorsByStatus(10000);
-CALL SelectMoviesByGenre(10000);
-CALL SelectMovieStudioName(10000);
-CALL SelectAllMaleUserProfiles(10000);
+CALL InsertMovieGenres(20000);
+CALL InsertSubscriptions(20000);
+CALL InsertUserProfiles(20000);
+CALL SelectDirectorsByStatus(20000);
+CALL SelectMoviesByGenre(20000);
+CALL SelectMovieStudioName(20000);
+CALL SelectAllMaleUserProfiles(20000);
 
 SELECT Procedure_Name, Duration_Miliseconds FROM Procedure_Log_Normalized;
 SET FOREIGN_KEY_CHECKS = 1;
@@ -299,20 +299,20 @@ DELIMITER ;
 
 INSERT INTO Procedure_Log_Denormalized (Procedure_Name)
 VALUES ('Scenario 1.2');
-CALL InsertProductionStudios(1000);
+CALL InsertProductionStudios(5000);
 CALL InsertGenres();
-CALL InsertMovies(1000);
-CALL InsertMovieGenres(1000);
-CALL InsertReviews(1000);
-CALL InsertAwards(1000);
-CALL InsertMovieAwards(1000);
-CALL InsertSubscriptions(1000);
-CALL InsertPeople(1000);
+CALL InsertMovies(5000);
+CALL InsertMovieGenres(5000);
+CALL InsertReviews(5000);
+CALL InsertAwards(5000);
+CALL InsertMovieAwards(5000);
+CALL InsertSubscriptions(5000);
+CALL InsertPeople(5000);
 CALL UpdateMovieRatings();
-CALL SelectDirectorsByStatus(1000);
-CALL SelectMoviesByGenre(1000);
-CALL SelectMovieStudioName(1000);
-CALL SelectAllMaleUserProfiles(1000);
+CALL SelectDirectorsByStatus(5000);
+CALL SelectMoviesByGenre(5000);
+CALL SelectMovieStudioName(5000);
+CALL SelectAllMaleUserProfiles(5000);
 
 TRUNCATE TABLE Actor_Movie;
 TRUNCATE TABLE Award;
@@ -327,22 +327,63 @@ TRUNCATE TABLE Subscription;
 
 INSERT INTO Procedure_Log_Denormalized (Procedure_Name)
 VALUES ('Scenario 2.2');
-CALL InsertProductionStudios(10000);
+CALL InsertProductionStudios(20000);
 CALL InsertGenres();
-CALL InsertMovies(10000);
-CALL InsertMovieGenres(10000);
-CALL InsertReviews(10000);
-CALL InsertAwards(10000);
-CALL InsertMovieAwards(10000);
-CALL InsertSubscriptions(10000);
-CALL InsertPeople(10000);
+CALL InsertMovies(20000);
+CALL InsertMovieGenres(20000);
+CALL InsertReviews(20000);
+CALL InsertAwards(20000);
+CALL InsertMovieAwards(20000);
+CALL InsertSubscriptions(20000);
+CALL InsertPeople(20000);
 CALL UpdateMovieRatings();
-CALL SelectDirectorsByStatus(10000);
-CALL SelectMoviesByGenre(10000);
-CALL SelectMovieStudioName(10000);
-CALL SelectAllMaleUserProfiles(10000);
+CALL SelectDirectorsByStatus(20000);
+CALL SelectMoviesByGenre(20000);
+CALL SelectMovieStudioName(20000);
+CALL SelectAllMaleUserProfiles(20000);
 
 SELECT Procedure_Name, Duration_Miliseconds FROM Procedure_Log_Denormalized;
 SET FOREIGN_KEY_CHECKS = 1;
 SET SQL_SAFE_UPDATES = 1;
 SET SQL_SAFE_UPDATES = @OLD_SAFE_UPDATES;
+
+#	1. Kakšne razlike v času izvajanja poizvedb opažate? 
+#		Opazim, da vnašanje podatkov načeloma traja dlje časa ampak so hitrosti poizvedb dokaj hitrejše.
+#---------------------------------------------------------------------
+#	NORMALIZED
+#---------------------------------------------------------------------
+#	Scenario 1.1	
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT DIRECTORS BY STATUS	10.447
+#	PONAVLJUJOČE SKUPINE 		- SELECT MOVIES BY GENRE		3.327
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT MOVIE STUDIO NAME		14.396
+#	ZDRUŽEVANJE RELACIJ 		- SELECT MALE PROFILES			9.663
+#	Scenario 2.1	
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT DIRECTORS BY STATUS	35.878
+#	PONAVLJUJOČE SKUPINE 		- SELECT MOVIES BY GENRE		14.708
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT MOVIE STUDIO NAME		55.983
+#	ZDRUŽEVANJE RELACIJ 		- SELECT MALE PROFILES			48.105
+
+#---------------------------------------------------------------------
+#	DENORMALIZED
+#---------------------------------------------------------------------
+#	Scenario 2.1	
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT DIRECTORS BY STATUS	0.545
+#	PONAVLJUJOČE SKUPINE 		- SELECT MOVIES BY GENRE		9.778
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT MOVIE STUDIO NAME		8.299
+#	ZDRUŽEVANJE RELACIJ 		- SELECT MALE PROFILES			3.584
+#	Scenario 2.2	
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT DIRECTORS BY STATUS	1.593
+#	PONAVLJUJOČE SKUPINE 		- SELECT MOVIES BY GENRE		38.077
+#	PODVAJANJE NEKLJUČNIH 1:M 	- SELECT MOVIE STUDIO NAME		19.525
+#	ZDRUŽEVANJE RELACIJ 		- SELECT MALE PROFILES			11.797
+
+#	2. Ali obstajajo razlike v času izvajanja poizvedb med normalizirano in denormalizirano podatkovno bazo?
+#		V mojem primeru so 3/4 načinov denormalizacije hitrejši pri času izvajanja poizvedb. 
+#		Edini primer kjer so poizvedbe počasnejše pri denormalizirani obliki je v primeru ponavljajočih skupin
+#		zaradi vpeljave JSON atributnega tipa, ki zahteva še dodatno notranjo poizvedbo po JSON vsebini
+
+#	3. Zakaj da/ne?
+#		Poizvedbe so zaradi denormalizacije, ki združi ponavljajoče in pomembne atribute oz. entitete dosti hitrejšexecute
+#		saj niso odvisne od drugih tabel oz. odvisnosti z tujimi ključi. Podatki se vnašajo sicer bolj dolgo zaradi podvajanj
+#		in sinhronizacije ampak so poizvedbe zato dosti hitrejše. (Poleg tega pa bomo redko kdaj vnesli takšno količino podatkov
+#		hkrati zato vpliv na vstavljanje podatkov v bazo ni tako velik).
