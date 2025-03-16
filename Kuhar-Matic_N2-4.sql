@@ -5,7 +5,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE IF NOT EXISTS Procedure_Log_Normalized (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    Procedure_Name VARCHAR(100000),
+    Procedure_Name VARCHAR(255),
     Start_Time DATETIME(6),
     End_Time DATETIME(6),
     Duration_Miliseconds DECIMAL(13,3),
@@ -122,45 +122,60 @@ DELIMITER ;
 
 INSERT INTO Procedure_Log_Normalized (Procedure_Name)
 VALUES ('Scenario 1.1');
-CALL InsertProductionStudios(100000);
-CALL InsertMovies(100000);
-CALL InsertPersons(100000);
-CALL InsertActors(100000);
-CALL InsertActorsInMovies(100000);
-CALL InsertReviews(100000);
-CALL InsertAwards(100000);
-CALL InsertMovieAwards(100000);
-CALL InsertDirectors(100000);
-CALL InsertDirectorsInMovies(100000);
+CALL InsertProductionStudios(1000);
+CALL InsertMovies(1000);
+CALL InsertPersons(1000);
+CALL InsertActors(1000);
+CALL InsertActorsInMovies(1000);
+CALL InsertReviews(1000);
+CALL InsertAwards(1000);
+CALL InsertMovieAwards(1000);
+CALL InsertDirectors(1000);
+CALL InsertDirectorsInMovies(1000);
 CALL InsertGenres();
-CALL InsertMovieGenres(100000);
-CALL InsertSubscriptions(100000);
-CALL InsertUserProfiles(100000);
-CALL SelectDirectorsByStatus(100000);
-CALL SelectMoviesByGenre(100000);
-CALL SelectMovieStudioName(100000);
-CALL SelectAllMaleUserProfiles(100000);
+CALL InsertMovieGenres(1000);
+CALL InsertSubscriptions(1000);
+CALL InsertUserProfiles(1000);
+CALL SelectDirectorsByStatus(1000);
+CALL SelectMoviesByGenre(1000);
+CALL SelectMovieStudioName(1000);
+CALL SelectAllMaleUserProfiles(1000);
+
+TRUNCATE TABLE Actor;
+TRUNCATE TABLE Actor_Movie;
+TRUNCATE TABLE Award;
+TRUNCATE TABLE Director;
+TRUNCATE TABLE Director_Movie;
+TRUNCATE TABLE Genre;
+TRUNCATE TABLE Movie;
+TRUNCATE TABLE Movie_Award;
+TRUNCATE TABLE Movie_Genre;
+TRUNCATE TABLE Person;
+TRUNCATE TABLE Production_Studio;
+TRUNCATE TABLE Review;
+TRUNCATE TABLE Subscription;
+TRUNCATE TABLE User_Profile;
 
 INSERT INTO Procedure_Log_Normalized (Procedure_Name)
 VALUES ('Scenario 2.1');
-CALL InsertProductionStudios(1000000);
-CALL InsertMovies(1000000);
-CALL InsertPersons(1000000);
-CALL InsertActors(1000000);
-CALL InsertActorsInMovies(1000000);
-CALL InsertReviews(1000000);
-CALL InsertAwards(1000000);
-CALL InsertMovieAwards(1000000);
-CALL InsertDirectors(1000000);
-CALL InsertDirectorsInMovies(1000000);
+CALL InsertProductionStudios(10000);
+CALL InsertMovies(10000);
+CALL InsertPersons(10000);
+CALL InsertActors(10000);
+CALL InsertActorsInMovies(10000);
+CALL InsertReviews(10000);
+CALL InsertAwards(10000);
+CALL InsertMovieAwards(10000);
+CALL InsertDirectors(10000);
+CALL InsertDirectorsInMovies(10000);
 CALL InsertGenres();
-CALL InsertMovieGenres(1000000);
-CALL InsertSubscriptions(1000000);
-CALL InsertUserProfiles(1000000);
-CALL SelectDirectorsByStatus(1000000);
-CALL SelectMoviesByGenre(1000000);
-CALL SelectMovieStudioName(1000000);
-CALL SelectAllMaleUserProfiles(1000000);
+CALL InsertMovieGenres(10000);
+CALL InsertSubscriptions(10000);
+CALL InsertUserProfiles(10000);
+CALL SelectDirectorsByStatus(10000);
+CALL SelectMoviesByGenre(10000);
+CALL SelectMovieStudioName(10000);
+CALL SelectAllMaleUserProfiles(10000);
 
 SELECT Procedure_Name, Duration_Miliseconds FROM Procedure_Log_Normalized;
 SET FOREIGN_KEY_CHECKS = 1;
@@ -178,7 +193,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE IF NOT EXISTS Procedure_Log_Denormalized (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    Procedure_Name VARCHAR(100000),
+    Procedure_Name VARCHAR(255),
     Start_Time DATETIME(6),
     End_Time DATETIME(6),
     Duration_Miliseconds DECIMAL(13,3),
@@ -284,37 +299,48 @@ DELIMITER ;
 
 INSERT INTO Procedure_Log_Denormalized (Procedure_Name)
 VALUES ('Scenario 1.2');
-CALL InsertProductionStudios(100000);
+CALL InsertProductionStudios(1000);
 CALL InsertGenres();
-CALL InsertMovies(100000);
-CALL InsertMovieGenres(100000);
-CALL InsertReviews(100000);
-CALL InsertAwards(100000);
-CALL InsertMovieAwards(100000);
-CALL InsertSubscriptions(100000);
-CALL InsertPeople(100000);
+CALL InsertMovies(1000);
+CALL InsertMovieGenres(1000);
+CALL InsertReviews(1000);
+CALL InsertAwards(1000);
+CALL InsertMovieAwards(1000);
+CALL InsertSubscriptions(1000);
+CALL InsertPeople(1000);
 CALL UpdateMovieRatings();
-CALL SelectDirectorsByStatus(100000);
-CALL SelectMoviesByGenre(100000);
-CALL SelectMovieStudioName(100000);
-CALL SelectAllMaleUserProfiles(100000);
+CALL SelectDirectorsByStatus(1000);
+CALL SelectMoviesByGenre(1000);
+CALL SelectMovieStudioName(1000);
+CALL SelectAllMaleUserProfiles(1000);
+
+TRUNCATE TABLE Actor_Movie;
+TRUNCATE TABLE Award;
+TRUNCATE TABLE Director_Movie;
+TRUNCATE TABLE Genre;
+TRUNCATE TABLE Movie;
+TRUNCATE TABLE Movie_Award;
+TRUNCATE TABLE Movie_Genre;
+TRUNCATE TABLE Person;
+TRUNCATE TABLE Production_Studio;
+TRUNCATE TABLE Subscription;
 
 INSERT INTO Procedure_Log_Denormalized (Procedure_Name)
 VALUES ('Scenario 2.2');
-CALL InsertProductionStudios(1000000);
+CALL InsertProductionStudios(10000);
 CALL InsertGenres();
-CALL InsertMovies(1000000);
-CALL InsertMovieGenres(1000000);
-CALL InsertReviews(1000000);
-CALL InsertAwards(1000000);
-CALL InsertMovieAwards(1000000);
-CALL InsertSubscriptions(1000000);
-CALL InsertPeople(1000000);
+CALL InsertMovies(10000);
+CALL InsertMovieGenres(10000);
+CALL InsertReviews(10000);
+CALL InsertAwards(10000);
+CALL InsertMovieAwards(10000);
+CALL InsertSubscriptions(10000);
+CALL InsertPeople(10000);
 CALL UpdateMovieRatings();
-CALL SelectDirectorsByStatus(1000000);
-CALL SelectMoviesByGenre(1000000);
-CALL SelectMovieStudioName(1000000);
-CALL SelectAllMaleUserProfiles(1000000);
+CALL SelectDirectorsByStatus(10000);
+CALL SelectMoviesByGenre(10000);
+CALL SelectMovieStudioName(10000);
+CALL SelectAllMaleUserProfiles(10000);
 
 SELECT Procedure_Name, Duration_Miliseconds FROM Procedure_Log_Denormalized;
 SET FOREIGN_KEY_CHECKS = 1;
