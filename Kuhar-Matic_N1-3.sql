@@ -1,3 +1,4 @@
+use mydbnormalized;
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE Actor_Movie;
 TRUNCATE TABLE Director_Movie;

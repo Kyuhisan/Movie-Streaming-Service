@@ -1,4 +1,4 @@
-use mydb;
+use mydbnormalized;
 
 SET @OLD_SAFE_UPDATES = @@SQL_SAFE_UPDATES;
 SET SQL_SAFE_UPDATES = 0;
@@ -280,7 +280,7 @@ CALL DeleteEveryMovie(1000000);
 SELECT CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
 WHERE TABLE_NAME = 'Movie' AND REFERENCED_TABLE_NAME = 'Production_Studio';
 
-ALTER TABLE Movie DROP FOREIGN KEY fk_movie_studio;
+ALTER TABLE Movie DROP FOREIGN KEY fk_Movie_Production_Studio;
 
 INSERT INTO Procedure_Log (Procedure_Name)
 VALUES ('Scenario 2.1');
@@ -307,7 +307,7 @@ CALL UpdateEveryMovie(1000000);
 CALL DeleteEveryMovie(1000000);
 
 ALTER TABLE Movie 
-ADD CONSTRAINT fk_movie_studio 
+ADD CONSTRAINT fk_Movie_Production_Studio 
 FOREIGN KEY (FK_Production_Studio) 
 REFERENCES Production_Studio(ID_Production_Studio) 
 ON DELETE CASCADE ON UPDATE CASCADE;
