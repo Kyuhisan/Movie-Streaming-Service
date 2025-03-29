@@ -14,6 +14,9 @@ DROP SCHEMA IF EXISTS `mydbNormalized` ;
 CREATE SCHEMA IF NOT EXISTS `mydbNormalized` DEFAULT CHARACTER SET utf8 ;
 USE `mydbNormalized` ;
 
+CREATE USER IF NOT EXISTS 'relationaldatabase'@'localhost' IDENTIFIED BY 'relationaldatabase';
+GRANT ALL PRIVILEGES ON mydbNormalized.* TO 'relationaldatabase'@'localhost';
+
 -- -----------------------------------------------------
 -- Table `mydbNormalized`.`Genre`
 -- -----------------------------------------------------
